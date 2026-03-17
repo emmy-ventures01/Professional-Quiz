@@ -1,113 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Signup - Professional Quiz Platform</title>
-  <style>
-    body {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      background: #fff;
-      color: #000;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-    }
-
-    header {
-      background: #fff;
-      padding: 20px;
-      border-bottom: 1px solid #000;
-    }
-
-    header img {
-      height: 80px;
-      width: auto;
-      margin-bottom: 10px;
-    }
-
-    .container {
-      max-width: 500px;
-      margin: 50px auto;
-      padding: 30px 20px;
-      background: #f9f9f9;
-      border-radius: 12px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.1);
-      text-align: left;
-    }
-
-    h2 {
-      font-size: 2em;
-      margin-bottom: 25px;
-      text-align: center;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: 600;
-    }
-
-    input, select {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 20px;
-      border-radius: 8px;
-      border: 1px solid #000;
-      font-size: 1em;
-    }
-
-    button {
-      padding: 15px;
-      width: 100%;
-      font-size: 1.1em;
-      border-radius: 8px;
-      border: 2px solid #000;
-      background: #000;
-      color: #fff;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    button:hover {
-      background: #fff;
-      color: #000;
-    }
-
-    @media (max-width: 500px) {
-      .container { padding: 25px 15px; }
-      h2 { font-size: 1.6em; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Signup - Professional Quiz</title>
+<style>
+body { font-family:'Helvetica Neue',Arial,sans-serif; background:#fff; color:#000; display:flex; justify-content:center; align-items:center; min-height:100vh; margin:0; padding:0;}
+.container { max-width:500px; width:100%; padding:30px; border:2px solid #000; border-radius:12px; }
+h1 { text-align:center; margin-bottom:25px; }
+label { display:block; margin-top:15px; margin-bottom:5px; font-weight:600; }
+input { width:100%; padding:12px; border:1px solid #000; border-radius:8px; font-size:1em; }
+button { margin-top:25px; width:100%; padding:12px; border-radius:8px; border:2px solid #000; background:#000; color:#fff; font-weight:600; cursor:pointer; transition:all 0.3s; }
+button:hover { background:#fff; color:#000; }
+</style>
 </head>
 <body>
-  <header>
-    <img src="https://uxwing.com/wp-content/themes/uxwing/download/quiz-icon.png" alt="Quiz Platform Logo">
-  </header>
+<div class="container">
+  <h1>Signup to Start Quiz</h1>
+  <form id="signupForm" action="https://formspree.io/f/mbdrrgvy" method="POST">
+    <label for="name">Full Name:</label>
+    <input type="text" name="name" id="name" required>
 
-  <div class="container">
-    <h2>Sign Up</h2>
-    <form action="https://formspree.io/f/mbdrrgvy" method="POST">
-      <label for="name">Full Name</label>
-      <input type="text" id="name" name="name" placeholder="Your full name" required>
+    <label for="age">Age:</label>
+    <input type="number" name="age" id="age" required>
 
-      <label for="age">Age</label>
-      <input type="number" id="age" name="age" placeholder="Your age" min="5" max="120" required>
+    <label for="experience">Computer Experience:</label>
+    <input type="text" name="experience" id="experience" placeholder="e.g., Beginner, Intermediate, Advanced" required>
 
-      <label for="experience">Computer Literacy Experience</label>
-      <select id="experience" name="experience" required>
-        <option value="" disabled selected>Select your experience</option>
-        <option value="Beginner">Beginner</option>
-        <option value="Intermediate">Intermediate</option>
-        <option value="Advanced">Advanced</option>
-      </select>
+    <label for="email">Email:</label>
+    <input type="email" name="email" id="email" required>
 
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" placeholder="you@example.com" required>
+    <button type="submit">Start Quiz</button>
+  </form>
+</div>
 
-      <button type="submit">Submit</button>
-    </form>
-  </div>
+<script>
+const form = document.getElementById('signupForm');
+
+form.addEventListener('submit', function(e){
+  e.preventDefault(); // prevent default Formspree page
+  const formData = new FormData(form);
+
+  fetch(form.action, {
+    method: 'POST',
+    body: formData,
+    headers: { 'Accept': 'application/json' }
+  }).then(response => {
+    // redirect to quiz page
+    window.location.href = "quiz.html";
+  }).catch(error => {
+    alert("There was a problem submitting the form. Please try again.");
+  });
+});
+</script>
 </body>
 </html>
