@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Professional Computer & Backend Quiz</title>
+<style>
+body { font-family:'Helvetica Neue',Arial,sans-serif; background:#fff; color:#000; margin:0; padding:0; display:flex; flex-direction:column; align-items:center; min-height:100vh;}
+header { width:100%; padding:15px 0; border-bottom:1px solid #000; text-align:center;}
+header img { height:60px; width:auto;}
+.container { max-width:900px; width:100%; margin-top:20px; padding:20px;}
+.progress-bar-container { width:100%; background:#e0e0e0; height:25px; border-radius:12px; margin-bottom:20px;}
+.progress-bar { height:100%; width:0%; background:#000; border-radius:12px; transition:width 0.3s;}
+.timer { font-weight:bold; font-size:1.2em; margin-bottom:20px; text-align:right;}
+.question-box { display:none; margin-bottom:20px;}
+.question-box.active { display:block;}
+.question-box p { font-size:1.2em; margin-bottom:15px;}
+.options { display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-bottom:20px;}
+.options label { display:block; padding:12px; border:2px solid #000; border-radius:8px; cursor:pointer; text-align:center; background:#f9f9f9;}
+.options input[type="radio"] { display:none;}
+.options input[type="radio"]:checked + label { background:#000; color:#fff; border:2px solid #000;}
+.status { display:flex; justify-content:space-between; margin-bottom:20px;}
+.nav-buttons { display:flex; justify-content:space-between; margin-bottom:20px;}
+button { padding:12px 20px; border-radius:8px; border:2px solid #000; background:#000; color:#fff; font-weight:600; cursor:pointer; transition:all 0.3s;}
+button:hover { background:#fff; color:#000;}
+input[type="email"] { width:100%; padding:12px; border:1px solid #000; border-radius:8px; margin-bottom:20px; font-size:1em;}
+@media(max-width:600px){ .options{grid-template-columns:1fr;} .timer{text-align:center;} }
+</style>
+</head>
+<body>
+<header>
+  <img src="https://uxwing.com/wp-content/themes/uxwing/download/quiz-icon.png" alt="Quiz Logo">
+</header>
+<div class="container">
+  <div class="status">
+    <div>Answered: <span id="answered">0</span></div>
+    <div>Unanswered: <span id="unanswered">20</span></div>
+  </div>
+  <div class="progress-bar-container">
+    <div class="progress-bar" id="progress-bar"></div>
+  </div>
+  <div class="timer" id="timer">Time left: 15s</div>
+
+  <form id="quizForm" action="https://formspree.io/f/mbdrrgvy" method="POST" data-redirect="confirmation.html">
+
+    <!-- QUESTIONS 1–20 -->
+    <div class="question-box active" data-question="1">
+      <p>1. Which of these is a programming language?</p>
+      <div class="options">
+        <input type="radio" name="q1" value="HTML" id="q1a" required><label for="q1a">HTML</label>
+        <input type="radio" name="q1" value="Python" id="q1b"><label for="q1b">Python</label>
+        <input type="radio" name="q1" value="CSS" id="q1c"><label for="q1c">CSS</label>
+        <input type="radio" name="q1" value="SQL" id="q1d"><label for="q1d">SQL</label>
+      </div>
+    </div>
+
+    <div class="question-box" data-question="2">
+      <p>2. What does HTML stand for?</p>
+      <div class="options">
+        <input type="radio" name="q2" value="HyperText Markup Language" id="q2a" required><label for="q2a">HyperText Markup Language</label>
+        <input type="radio" name="q2" value="Hyper Tool Markup Language" id="q2b"><label for="q2b">Hyper Tool Markup Language</label>
+        <input type="radio" name="q2" value="Home Tool Markup Language" id="q2c"><label for="q2c">Home Tool Markup Language</label>
+        <input type="radio" name="q2" value="HighText Machine Language" id="q2d"><label for="q2d">HighText Machine Language</label>
+      </div>
+    </div>
+
+    <div class="question-box" data-question="3">
+      <p>3. Which symbol is used for comments in JavaScript?</p>
+      <div class="options">
+        <input type="radio" name="q3" value="//" id="q3a" required><label for="q3a">//</label>
+        <input type="radio" name="q3" value="/* */" id="q3b"><label for="q3b">/* */</label>
+        <input type="radio" name="q3" value="#!" id="q3c"><label for="q3c">#!</label>
+        <input type="radio" name="q3" value="$$" id="q3d"><label for="q3d">$$</label>
+      </div>
+    </div>
+
+    <div class="question-box" data-question="4">
+      <p>4. Which of these is a backend programming language?</p>
+      <div class="options">
+        <input type="radio" name="q4" value="JavaScript" id="q4a" required><label for="q4a">JavaScript</label>
+        <input type="radio" name="q4" value="Python" id="q4b"><label for="q4b">Python</label>
+        <input type="radio" name="q4" value="CSS" id="q4c"><label for="q4c">CSS</label>
+        <input type="radio" name="q4" value="HTML" id="q4d"><label for="q4d">HTML</label>
+      </div>
+    </div>
+
+    <div class="question-box" data-question="5">
+      <p>5. What does CSS stand for?</p>
+      <div class="options">
+        <input type="radio" name="q5" value="Cascading Style Sheets" id="q5a" required><label for="q5a">Cascading Style Sheets</label>
+        <input type="radio" name="q5" value="Computer Style Sheets" id="q5b"><label for="q5b">Computer Style Sheets</label>
+        <input type="radio" name="q5" value="Creative Style System" id="q5c"><label for="q5c">Creative Style System</label>
+        <input type="radio" name="q5" value="Colorful Style Sheets" id="q5d"><label for="q5d">Colorful Style Sheets</label>
+      </div>
+    </div>
+
+    <div class="question-box" data-question="6">
+      <p>6. Which HTML tag is used to define a table?</p>
+      <div class="options">
+        <input type="radio" name="q6" value="<table>" id="q6a" required><label for="q6a">&lt;table&gt;</label>
+        <input type="radio" name="q6" value="<tab>" id="q6b"><label for="q6b">&lt;tab&gt;</label>
+        <input type="radio" name="q6" value="<td>" id="q6c"><label for="q6c">&lt;td&gt;</label>
+        <input type="radio" name="q6" value="<tr>" id="q6d"><label for="q6d">&lt;tr&gt;</label>
+      </div>
+    </div>
+
+    <div class="question-box" data-question="7">
+      <p>7. Which SQL statement is used to retrieve data?</p>
+      <div class="options">
+        <input type="radio" name="q7" value="SELECT" id="q7a" required><label for="q7a">SELECT</label>
+        <input type="radio" name="q7" value="INSERT" id="q7b"><label for="q7b">INSERT</label>
+        <input type="radio" name="q7" value="UPDATE" id="q7c"><label for="q7c">UPDATE</label>
+        <input type="radio" name="q7" value="DELETE" id="q7d"><label for="q7d">DELETE</label>
+      </div>
+    </div>
+
+    <div class="question-box" data-question="8">
+      <p>8. Which of these is a JavaScript framework?</p>
+      <div class="options">
+        <input type="radio" name="q8" value="React" id="q8a" required><label for="q8a">React</label>
+        <input type="radio" name="q8" value="Bootstrap" id="q8b"><label for="q8b">Bootstrap</label>
+        <input type="radio" name="q8" value="jQuery" id="q8c"><label for="q8c">jQuery</label>
+        <input type="radio" name="q8" value="HTML" id="q8d"><label for="q8d">HTML</label>
+      </div>
+    </div>
+
+    <div class="question-box" data-question="9">
+      <p>9. In Python, which symbol is used for exponentiation?</p>
+      <div class="options">
+        <input type="radio" name="q9" value="*" id="q9a" required><label for="q9a">*</label>
+        <input type="radio" name="q9" value="**" id="q9b"><label for="q9b">**</label>
+        <input type="radio" name="q9" value="^" id="q9c"><label for="q9c">^</label>
+        <input type="radio" name="q9" value="%" id="q9d"><label for="q9d">%</label>
+      </div>
+    </div>
+
+    <div class="question-box" data-question="10">
+      <p>10. Which data structure uses key-value pairs?</p>
+      <div class="options">
+        <input type="radio" name="q10" value="Array" id="q10a" required><label for="q10a">Array</label>
+        <input type="radio" name="q10" value="Dictionary" id="q10b"><label for="q10b">Dictionary</label>
+        <input type="radio" name="q10" value="Set" id="q10c"><label for="q10c">Set</label>
+        <input type="radio" name="q10" value="List" id="q10d"><label for="q10d">List</label>
+      </div>
+    </div>
+
+    <!-- Questions 11–20 -->
+    <div class="question-box" data-question="11">
+      <p>11. Which HTTP method is used to update data on a server?</p>
+      <div class="options">
+        <input type="radio" name="q11" value="GET" id="q11a" required><label for="q11a">GET</label>
+        <input type="radio" name="q11" value="POST" id="q11b"><label for="q11b">POST</label>
+        <input type="radio" name="q11" value="PUT" id="q11c"><label for="q11c">PUT</label>
+        <input type="radio" name="q11" value="DELETE" id="q11d"><label for="q11d">DELETE</label>
+      </div>
+    </div>
+
+    <div class="question-box" data-question="12">
+      <p>12. Which SQL command is used to remove a table?</p>
+      <div class="options">
+        <input type="radio" name="q12" value="DELETE" id="q12a" required><label for="q12a">DELETE</label>
+        <input type="radio" name="q12" value="DROP" id="q12b"><label for="q12b">DROP</label>
+        <input type="radio" name="q12" value="REMOVE" id="q12c"><label for="q12c">REMOVE</label>
+        <input type="radio" name="q12" value="TRUNCATE" id="q12d"><label for="q12d">TRUNCATE</label>
+      </div>
+    </div>
+
+    <div class="question-box" data-question="13">
+      <p>13. Which protocol is used to browse websites?</p>
+      <div class="options">
+        <input type="radio" name="q13" value="ftp" id="q13a" required><label for="q13a">FTP</label>
+        <input type="radio" name="q13" value="smtp" id="q13b"><label for="q13b">SMTP</label>
+        <input type="radio" name="q13" value="http" id="q13c"><label for="q13c">HTTP</label>
+        <input type="radio" name="q13" value="ssh" id="q13d"><label for="q13d">SSH</label>
+      </div>
+    </div>
+
+    <div class="question-box" data-question="14">
+      <p>14. Which of these is a NoSQL database?</p>
+      <div class="options">
+        <input type="radio" name="q14" value="MySQL" id="q14a" required><label for="q14a">MySQL</label>
+        <input type="radio" name="q14" value="Oracle" id="q14b"><label for="q14b">Oracle</label>
+        <input type="radio" name="q14" value="MongoDB" id="q14c"><label for="q14c">MongoDB</label>
+        <input type="radio" name="q14" value="SQLServer" id="q14d"><label for="q14d">SQLServer</label>
+      </div>
+    </div>
+
+    <div class="question-box" data-question="15">
+      <p>15. Which JavaScript function converts a JSON string to an object?</p>
+      <div class="options">
+        <input type="radio" name="q15" value="JSON.stringify()" id="q15a" required><label for="q15a">JSON.stringify()</label>
+        <input type="radio" name="q15" value="JSON.parse()" id="q15b"><label for="q15b">JSON.parse()</label>
+        <input type="radio" name="q15" value="JSON.toObject()" id="q15c"><label for="q15c">JSON.toObject()</label>
+        <input type="radio" name="q15" value="JSON.decode()" id="q15d"><label for="q15d">JSON.decode()</label>
+      </div>
+    </div>
+
+    <div class="question-box" data-question="16">
+      <p>16. Which HTTP status code represents "Not Found"?</p>
+      <div class="options">
+        <input type="radio" name="q16" value="200" id="q16a" required><label for="q16a">200</label>
+        <input type="radio" name="q16" value="301" id="q16b"><label for="q16b">301</label>
+        <input type="radio" name="q16" value="404" id="q16c"><label for="q16c">404</label>
+        <input type="radio" name="q16" value="500" id="q16d"><label for="q16d">500</label>
+      </div>
+    </div>
+
+    <div class="question-box" data-question="17">
+      <p>17. Which command installs a Node.js package?</p>
+      <div class="options">
+        <input type="radio" name="q17" value="npm init" id="q17a" required><label for="q17a">npm init</label>
+        <input type="radio" name="q17" value="npm start" id="q17b"><label for="q17b">npm start</label>
+        <input type="radio" name="q17" value="npm install" id="q17c"><label for="q17c">npm install</label>
+        <input type="radio" name="q17" value="node install" id="q17d"><label for="q17d">node install</label>
+      </div>
+    </div>
+
+    <div class="question-box" data-question="18">
+      <p>18. Which front-end library is commonly paired with Node.js for full-stack development?</p>
+      <div class="options">
+        <input type="radio" name="q18" value="Angular" id="q18a" required><label for="q18a">Angular</label>
+        <input type="radio" name="q18" value="React" id="q18b"><label for="q18b">React</label>
+        <input type="radio" name="q18" value="Vue" id="q18c"><label for="q18c">Vue</label>
+        <input type="radio" name 
+<!-- Question 19 -->
+<div class="question-box" data-question="19">
+  <p>19. Which language is commonly used to interact with relational databases?</p>
+  <div class="options">
+    <input type="radio" name="q19" value="Python" id="q19a" required><label for="q19a">Python</label>
+    <input type="radio" name="q19" value="HTML" id="q19b"><label for="q19b">HTML</label>
+    <input type="radio" name="q19" value="SQL" id="q19c"><label for="q19c">SQL</label>
+    <input type="radio" name="q19" value="CSS" id="q19d"><label for="q19d">CSS</label>
+  </div>
+</div>
+
+<!-- Question 20 -->
+<div class="question-box" data-question="20">
+  <p>20. Which protocol ensures secure communication over the web?</p>
+  <div class="options">
+    <input type="radio" name="q20" value="HTTP" id="q20a" required><label for="q20a">HTTP</label>
+    <input type="radio" name="q20" value="HTTPS" id="q20b"><label for="q20b">HTTPS</label>
+    <input type="radio" name="q20" value="FTP" id="q20c"><label for="q20c">FTP</label>
+    <input type="radio" name="q20" value="SMTP" id="q20d"><label for="q20d">SMTP</label>
+  </div>
+</div>
+
+<!-- Email input + hidden score -->
+<label for="email">Enter your email to receive results:</label>
+<input type="email" name="email" id="email" required>
+<input type="hidden" name="score" id="scoreInput">
+
+<div class="nav-buttons">
+  <button type="button" id="prevBtn">Previous</button>
+  <button type="button" id="nextBtn">Next</button>
+  <button type="submit" id="submitBtn" style="display:none;">Submit</button>
+</div>
+</form>
+</div>
+
+<script>
+const correctAnswers = {
+q1:"Python",q2:"HyperText Markup Language",q3:"//",q4:"Python",q5:"Cascading Style Sheets",
+q6:"<table>",q7:"SELECT",q8:"React",q9:"**",q10:"Dictionary",
+q11:"PUT",q12:"DROP",q13:"http",q14:"MongoDB",q15:"JSON.parse()",
+q16:"404",q17:"npm install",q18:"React",q19:"SQL",q20:"HTTPS"
+};
+
+const quizForm = document.getElementById("quizForm");
+const scoreInput = document.getElementById("scoreInput");
+const answeredSpan = document.getElementById("answered");
+const unansweredSpan = document.getElementById("unanswered");
+const progressBar = document.getElementById("progress-bar");
+const timerEl = document.getElementById("timer");
+const questions = document.querySelectorAll(".question-box");
+let currentQuestion = 0;
+let timeLeft = 15;
+let timerInterval = setInterval(updateTimer,1000);
+
+function showQuestion(index){
+  questions.forEach(q=>q.classList.remove("active"));
+  questions[index].classList.add("active");
+  updateStatus();
+}
+
+function updateTimer(){
+  if(timeLeft<=0){
+    if(currentQuestion<questions.length-1){currentQuestion++; timeLeft=15; showQuestion(currentQuestion);}
+    else{clearInterval(timerInterval);}
+  }
+  timerEl.textContent="Time left: "+timeLeft+"s";
+  timeLeft--;
+}
+
+function updateStatus(){
+  let answered=0; let unanswered=0;
+  for(let i=1;i<=20;i++){
+    const ans=document.querySelector(`input[name="q${i}"]:checked`);
+    if(ans) answered++; else unanswered++;
+  }
+  answeredSpan.textContent=answered;
+  unansweredSpan.textContent=unanswered;
+  progressBar.style.width=(answered/20*100)+"%";
+  document.getElementById("prevBtn").style.display = currentQuestion===0?"none":"inline-block";
+  document.getElementById("nextBtn").style.display = currentQuestion===questions.length-1?"none":"inline-block";
+  document.getElementById("submitBtn").style.display = currentQuestion===questions.length-1?"inline-block":"none";
+}
+
+document.getElementById("nextBtn").addEventListener("click",()=>{if(currentQuestion<questions.length-1){currentQuestion++; timeLeft=15; showQuestion(currentQuestion);}});
+document.getElementById("prevBtn").addEventListener("click",()=>{if(currentQuestion>0){currentQuestion--; timeLeft=15; showQuestion(currentQuestion);}});
+quizForm.addEventListener("change",updateStatus);
+
+quizForm.addEventListener("submit",function(e){
+  e.preventDefault();
+  let score=0;
+  for(let key in correctAnswers){
+    const ans=quizForm.querySelector(`input[name="${key}"]:checked`);
+    if(ans && ans.value===correctAnswers[key]) score++;
+  }
+  scoreInput.value=score;
+
+  // Submit via Formspree and redirect
+  const formData = new FormData(quizForm);
+  fetch(quizForm.action,{
+    method:'POST',
+    body:formData,
+    headers:{ 'Accept':'application/json' }
+  }).then(response=>{
+    window.location.href = "confirmation.html";
+  }).catch(error=>{
+    alert("There was a problem submitting your quiz. Please try again.");
+  });
+});
+
+showQuestion(currentQuestion);
+</script>
+</body>
+</html>
